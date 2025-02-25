@@ -59,12 +59,44 @@ class LinkedList
 
   def prepend(str)
     current = @head
-
-    # temp_value = current.value
-    # temp_next_node = current.next_node
-
     new_node = Node.new(str,current)
     @head = new_node
+  end
+
+  def insert_at(value,index)
+    current = @head
+
+    if (index == 0)
+      self.prepend(value)
+    else
+        (index-1).times do
+        current = current.next_node
+      end
+    end
+
+    inserted_node = Node.new(value,current.next_node)
+    current.next_node = inserted_node
+  end
+
+  def remove_at(index)
+    current = @head
+    temp_pointer = 0
+
+    if (index == 0)
+      current = current.next_node
+      @head = current
+    else
+      (index).times do
+        current = current.next_node
+        temp_pointer = current.next_node
+      end
+    end
+
+    current = @head
+    (index-1).times do
+      current = current.next_node
+    end
+    current.next_node = temp_pointer
   end
 
   def head
@@ -117,7 +149,6 @@ class LinkedList
   end
 
 end
-
 
 
 # p list.at(1)
